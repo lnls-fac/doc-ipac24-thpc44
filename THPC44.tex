@@ -8,63 +8,28 @@
 %       # References to the current IPAC are changed to "IPAC'19, Melbourne, Australia"
 %       # font for ‘url’ style changed to ‘newtxtt’ as it is easier to distinguish "O" and "0"
 %
-\documentclass[a4paper,
-               %boxit,        % check whether paper is inside correct margins
-               %titlepage,    % separate title page
-               %refpage       % separate references
-               biblatex,     % biblatex is used
-               %keeplastbox,   % flushend option: not to un-indent last line in References
-               %nospread,     % flushend option: do not fill with whitespace to balance columns
-               %hyphens,      % allow \url to hyphenate at "-" (hyphens)
-               %xetex,        % use XeLaTeX to process the file
-               %luatex,       % use LuaLaTeX to process the file
-               ]{jacow}
+\documentclass
+[
+    a4paper,
+    %boxit,        % check whether paper is inside correct margins
+    %titlepage,    % separate title page
+    %refpage       % separate references
+    biblatex,     % biblatex is used
+    %keeplastbox,   % flushend option: not to un-indent last line in References
+    %nospread,     % flushend option: do not fill with whitespace to balance columns
+    %hyphens,      % allow \url to hyphenate at "-" (hyphens)
+    %xetex,        % use XeLaTeX to process the file
+    %luatex,       % use LuaLaTeX to process the file
+]{jacow}
 %
 % ONLY FOR \footnote in table/tabular
 %
 \usepackage{pdfpages,multirow,ragged2e} %
-%
-% CHANGE SEQUENCE OF GRAPHICS EXTENSION TO BE EMBEDDED
-% ----------------------------------------------------
-% test for XeTeX where the sequence is by default eps-> pdf, jpg, png, pdf, ...
-%    and the JACoW template provides JACpic2v3.eps and JACpic2v3.jpg which
-%    might generates errors, therefore PNG and JPG first
-%
-\makeatletter%
-	\ifboolexpr{bool{xetex}}
-	 {\renewcommand{\Gin@extensions}{.pdf,%
-	                    .png,.jpg,.bmp,.pict,.tif,.psd,.mac,.sga,.tga,.gif,%
-	                    .eps,.ps,%
-	                    }}{}
-\makeatother
 
-% CHECK FOR XeTeX/LuaTeX BEFORE DEFINING AN INPUT ENCODING
-% --------------------------------------------------------
-%   utf8  is default for XeTeX/LuaTeX
-%   utf8  in LaTeX only realises a small portion of codes
 %
-\ifboolexpr{bool{xetex} or bool{luatex}} % test for XeTeX/LuaTeX
- {}                                      % input encoding is utf8 by default
- {\usepackage[utf8]{inputenc}}           % switch to utf8
-
-% \usepackage[USenglish]{babel}
-% \usepackage[utf8]{inputenc}
-% \usepackage{physics}
-% \usepackage{siunitx}
-% \usepackage{amsfonts, amsmath, amssymb}
+% To define glossaries
+%
 \usepackage[acronym]{glossaries}
-% \usepackage{url}
-
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,      
-    urlcolor=cyan,
-    pdftitle={Overleaf Example},
-    pdfpagemode=FullScreen,
-    }
-\urlstyle{same}
 
 %
 % if BibLaTeX is used
@@ -75,12 +40,9 @@
  }{}
 \listfiles
 
-%%
-%%   Lengths for the spaces in the title
-%%   \setlength\titleblockstartskip{..}  %before title, default 3pt
-%%   \setlength\titleblockmiddleskip{..} %between title + author, default 1em
-%%   \setlength\titleblockendskip{..}    %afterauthor, default 1em
-
+%
+% New commands
+%
 \newcommand*{\rom}[1]{\uppercase\expandafter{\romannumeral#1\relax}}
 \providecommand{\der}{\mathrm{d}}
 \providecommand{\rf}{\mathrm{rf}}
@@ -88,96 +50,97 @@
 \providecommand{\frf}{f_\rf}
 \providecommand{\Real}[1]{\ensuremath{\mathrm{Re}\left\{#1\right\}}}
 
+%
+% Glossaries
+%
 \newacronym{3hc}{3HC}{third-harmonic cavity}
 \newacronym{dcct}{DCCT}{direct-current current transformer}
 \newacronym{dft}{DFT}{discrete Fourier transform}
 \newglossaryentry{bbb}
 {
-  name={BbB},
-  description={bunch-by-bunch feedback system},
-  first={bunch-by-bunch (\glsentrytext{bbb}) feedback system},
+    name={BbB},
+    description={bunch-by-bunch feedback system},
+    first={bunch-by-bunch (\glsentrytext{bbb}) feedback system},
 }
 \newglossaryentry{hom}
 {
-  name={HOM},
-  description={higher-order mode},
-  first={\glsentrydesc{hom} (\glsentrytext{hom})},
-  plural={HOMs},
-  descriptionplural={higher-order modes},
-  firstplural={\glsentrydescplural{hom} (\glsentryplural{hom})}
+    name={HOM},
+    description={higher-order mode},
+    first={\glsentrydesc{hom} (\glsentrytext{hom})},
+    plural={HOMs},
+    descriptionplural={higher-order modes},
+    firstplural={\glsentryplural{hom}}
 }
 
 
 \begin{document}
-
 \title{Broadband impedance induced heating proxy for operation at higher total current at SIRIUS}
-
-\author{
+\author
+{
     F. H. de Sá\thanks{murilo.alves@lnls.br}\textsuperscript{1},
+    I. C. de Almeida\textsuperscript{1},
     M. B. Alves\textsuperscript{1,2},
     G. Gomes\textsuperscript{3},
-    I. C. de Almeida\textsuperscript{1},
     L. Lin\textsuperscript{1},
     X. Resende\textsuperscript{1}\\
     \textsuperscript{1}Brazilian Synchrotron Light Laboratory--LNLS, Campinas, Brazil\\
     \textsuperscript{2}Gleb Wataghin Institute of Physics, University of Campinas--UNICAMP, Campinas, Brazil\\
     \textsuperscript{3}Brazilian Center for Research in Energy and Materials--CNPEM, Campinas, Brazil
 }
-
 \maketitle
 
 \begin{abstract}
-    SIRIUS is a 4th generation synchrotron light source built and operated by the Brazilian Synchrotron Light Laboratory (LNLS), in Campinas, Brazil. Currently, SIRIUS storage ring operates in top-up mode at 100 mA in uniform fill. The main limiting factor for reaching higher currents is the temporary RF system in use. It is comprised of one PETRA 7-Cell cavity and two solid state amplifier towers that combined provide at most 120kW of power. By mid 2024, two superconducting RF cavities will replace the current cavity and two amplifier towers will be added to the system, allowing operation at higher currents. The design current of SIRIUS storage ring is 350 mA, which can only be achieved once a third harmonic cavity is installed to lengthen the bunches to avoid excessive wake-induced heating of sensitive components. However, the installation of such cavity is not foreseen in the near future, which raises the question of which is the maximum current in uniform fill SIRIUS can be operated. This work will present some theoretical and experimental studies carried out to answer this question.
+    SIRIUS is a 4\textsuperscript{th} generation synchrotron light source built and operated by the Brazilian Synchrotron Light Laboratory (LNLS), in Campinas, Brazil. Currently, SIRIUS storage ring operates in top-up mode at 100 mA in uniform fill. The main limiting factor for reaching higher currents is the temporary RF system in use. It is comprised of one PETRA 7-Cell cavity and two solid state amplifier towers that combined provide at most 120kW of power. By mid 2024, two superconducting RF cavities will replace the current cavity and two amplifier towers will be added to the system, allowing operation at higher currents. The design current of SIRIUS storage ring is 350 mA, which can only be achieved once a third harmonic cavity is installed to lengthen the bunches to avoid excessive wake-induced heating of sensitive components. However, the installation of such cavity is not foreseen in the near future, which raises the question of which is the maximum current in uniform fill SIRIUS can be operated. This work will present some theoretical and experimental studies carried out to answer this question.
 \end{abstract} 
 
 \section{Introduction}
-    SIRIUS RF power plant upgrade will be ready for commissioning in October of 2024. Once this system is operating, it will allow increasing the stored current in users operations to~\SI{350}{\milli\ampere} with the design nominal voltage of~\SI{3}{\mega\volt}, considering the energy loss by dipoles and all the undulators of Phase~\rom{1} of operation. The expected natural bunch length at this voltage is approximately~\SI{2.4}{\milli\meter}. This small bunch imposes a large wake-field induced heat-load on the accelerators components and shorten the Touschek Lifetime of the machine. During design stage a~\gls{3hc} was considered to lengthen the bunches and alleviate these effects. However, the installation of this cavity is not planned for the near future. This work describes an study to estimate the maximum stored current SIRIUS storage ring can operate without the~\gls{3hc}, while keeping a reasonable lifetime for top-up operation and no heating issues.
+    SIRIUS RF power plant upgrade will be ready for commissioning in October of 2024. Once this system is operating, it will allow increasing the stored current in users operations to~\SI{350}{\milli\ampere} with the design nominal voltage of~\SI{3}{\mega\volt}, considering the energy loss by dipoles and all the undulators of Phase~\rom{1} of operation. The expected natural bunch length at this voltage is approximately~\SI{2.4}{\milli\meter}. This short bunch imposes a large wake-field induced heat-load on the accelerator components and shorten the Touschek Lifetime of the machine. A~\gls{3hc} is considered to lengthen the bunches and alleviate these effects, but its installation is not planned for the near future. For this reason, it is important to estimate the maximum stored current SIRIUS storage ring can operate without the~\gls{3hc}.
 
-    To estimate the heating load for higher currents we combined experiments in the machine with different filling patterns with estimates from the impedance budget model. Most of the heating load of SIRIUS storage ring is due to broadband impedances, according to the model. For this type of wake-field the heat-load depends on the squared sum of the filling pattern and on the total current squared. This means that we can estimate the heating load of a filling pattern with smaller squared sum and higher total current using another filling with higher squared sum and smaller total current. This method is useful for SIRIUS because the current total power available by the RF system limits the maximum stored current to~\SI{100}{\milli\ampere}, with a gap voltage of~\SI{\sim1.57}{\mega\volt}. SIRIUS operates with uniform filling, which is the filling pattern with the smallest possible squared sum. This way, by using any other filling pattern at~\SI{100}{\milli\ampere}, we can estimate the heating load of the uniform filling at higher currents.
+    One way to estimate the heating load for higher currents involves using different filling patterns. Most of the heating load of SIRIUS storage ring is due to broadband impedances, according to the model. For this type of wake-field the heat-load depends on the squared sum of the filling pattern and on the total current squared. This fact is useful for SIRIUS because the current total power available by the RF system limits the maximum stored current to~\SI{100}{\milli\ampere}, with a gap voltage of~\SI{\sim1.57}{\mega\volt}. SIRIUS operates with uniform filling, which has the smallest possible squared sum. In this way, by using any other filling patterns at~\SI{100}{\milli\ampere}, we can estimate the heating load of the uniform filling at higher currents.
 
-    Another way of estimating the heat-load for future operations consists in decreasing the gap voltage of the cavity. With smaller voltage, the power consumption of the cavity itself decrease, which allows increasing the total stored current. Currently, SIRIUS operates with a PETRA 7-Cell cavity at a gap voltage of~\SI{\sim1.57}{\mega\volt} and its power plant has~\SI{\sim100}{\kilo\watt} of available power. From this,~\SI{\sim50}{\kilo\watt} is used to keep the gap voltage and the remaining power is consumed by the~\SI{100}{\milli\ampere} beam. Estimates show that decreasing the gap voltage to~\SI{\sim0.7}{\mega\volt} would still keep Touschek lifetime above~\SI{1}{\hour} (the energy loss per turn in SIRIUS storage ring is~\SI{\sim480}{\kilo\electronvolt}) and allow the maximum stored current to increase to~\SI{\sim170}{\milli\ampere}. This method has the advantage of keeping the same filling pattern of regular operation, thus sampling the impedance at the same harmonics, which also serves as an estimate of the effect of narrow band impedance sources. On the other hand, the bunch length is larger at lower gap voltages, which limits the impedance range sampled by the beam and underestimate the broadband effect. The natural bunch length at current nominal operations is~\SI{\sim3.2}{\milli\meter} and with~\SI{0.7}{\mega\volt} of gap voltage it would increase to~\SI{5.8}{\milli\meter} and reduce the frequency bandwidth of the beam from~\SI{\sim30}{\giga\hertz} to~\SI{\sim17}{\giga\hertz}. Simulations with the impedance budget shows that the current increase is not sufficient to compensate the larger bunch length for most components, such that the resulting power load is smaller in this configurations. Among the few components the larger current does increase the power load is the~\gls{dcct} and the longitudinal kicker for the~\gls{bbb}. Another possible practical disadvantage of this method of estimating the power load at higher currents is related to coupled-bunch instabilities. The lower cavity voltage reduces the synchrotron tune, which decreases the longitudinal instability threshold. For SIRIUS this might be a problem because at~\SI{100}{\milli\ampere} and nominal gap voltage the beam is already unstable due to~\glspl{hom} of the PETRA 7-Cell cavity and is stabilized by the~\gls{bbb}. With the lower tune, the instability would be stronger and the~\gls{bbb} would probably not be able to control the instability anymore.
+    Another way of estimating the heat-load consists in decreasing the gap voltage of the cavity. The power consumption of the cavity itself decreases, which allows increasing the total stored current. Currently, SIRIUS operates with a PETRA 7-Cell cavity at a gap voltage of~\SI{\sim1.57}{\mega\volt} with a total power of~\SI{\sim100}{\kilo\watt}. From this,~\SI{\sim50}{\kilo\watt} is used to keep the gap voltage and the remaining power is consumed by the~\SI{100}{\milli\ampere} beam. Decreasing the gap voltage to~\SI{\sim0.7}{\mega\volt} would still keep Touschek lifetime above~\SI{1}{\hour} (the energy loss per turn in SIRIUS storage ring is~\SI{\sim480}{\kilo\electronvolt}) and allow the maximum stored current to increase to~\SI{\sim170}{\milli\ampere}. This method has the advantage of keeping the same filling pattern of regular operation, thus sampling the impedance at the same harmonics, which also serves as an estimate of the effect of narrow band impedance sources. On the other hand, the bunch length is larger at lower gap voltages, which limits the frequency range of the impedance sampled by the beam and underestimate the broadband effect. 
+
+    This work will describe the experimental and theoretical studies carried out estimate the maximum beam current SIRIUS can operate, while keeping a reasonable lifetime for top-up operation and no heating issues.
 
 \section{Theory of Heating Load}
-    The Power deposited by the beam in a component of the vacuum chamber is given by
+    The power deposited by the beam in a component of the vacuum chamber is given by
     \begin{equation}\label{eq:power_general}
-        P = I_\mathrm{t}^2T_0 \frac{\omega_0}{2\pi}\sum_{p=-\infty}^{\infty} \left|\tilde{\lambda}(p\omega_0)\right|^2\Real{Z(p\omega_0)}
+        P = I_\mathrm{t}^2T_0 \frac{\omega_0}{2\pi}\sum_{p=-\infty}^{\infty} \left|\tilde{\lambda}(p\omega_0)\right|^2\Real{Z(p\omega_0)},
     \end{equation}
     where $I_\mathrm{t}>0$ is the total current of the beam, $T_0$ and $\omega_0$ are the revolution period and angular frequency of the storage ring, $Z$ is the longitudinal impedance of the component and 
     \begin{equation}
         \tilde{\lambda}(\omega) = \int_{-\infty}^\infty\der z \lambda(z) e^{i\omega z/c},
     \end{equation}
     where $c$ is the speed of light and $\lambda(z)$ is the longitudinal distribution of the beam, which can be written as
-    \begin{equation}
-        \lambda(z) = \sum_{\ell=0}^{h-1} F_\ell \lambda_\ell(z - \ell \lambda_\rf),\label{eq:distribution_oneturn}
-    \end{equation}
+    $
+        \lambda(z) = \sum_{\ell=0}^{h-1} F_\ell \lambda_\ell(z - \ell \lambda_\rf)
+    $,
     where $h$ is the harmonic number of the ring, $\lambda_\rf=cT_0/h$ is the rf wavelength, $\lambda_\ell(z)$ is the distribution of the $\ell$-th bunch and $F_\ell \ge 0$ are the components of the filling pattern vector,
     $
     F = \left(\frac{I_0}{I_\mathrm{t}},\dots, \frac{I_{h-1}}{I_\mathrm{t}}\right)^\mathrm{T}
-    $
-    with $F_\ell = \frac{I_\ell}{I_\mathrm{t}}$, which sums to unity. Since the bunch distributions are normalized to unity, then the beam distribution is also normalized to unity.
+    $,
+    which sums to unity. Since the bunch distributions are normalized to unity, then the beam distribution is also normalized to unity.
     
     The Fourier transform of the longitudinal distribution is then given by
-    \begin{equation}
+    $
         \tilde{\lambda}(\omega) = \sum_{\ell=0}^{h-1}F_\ell\tilde{\lambda_\ell}(\omega)e^{i\ell\omega \lambda_\rf/c}
-    \end{equation}
+    $
     and its squared modulus is
     \begin{equation}\label{eq:modulus_squared}
-        \left|\tilde{\lambda}(\omega)\right|^2 = \left|\tilde{\lambda_0}(\omega)\right|^2 \left|B(\omega)\right|^2.
+        \left|\tilde{\lambda}(\omega)\right|^2 = \left|\tilde{\lambda_0}(\omega)\right|^2 \left|B(\omega)\right|^2,
     \end{equation}
     where we defined the quantity $B(\omega) = \sum_{\ell=0}^{h-1}F_\ell e^{i\ell\omega \lambda_\rf/c}$
     and assumed all bunch distributions are equal to $\lambda_0(z)$.
 
-    Inserting equation~\eqref{eq:modulus_squared} in equation~\eqref{eq:power_general}, we get
+    Inserting Eq.~\eqref{eq:modulus_squared} in Eq.~\eqref{eq:power_general}, we get
     \begin{equation}
-        P = I_\mathrm{t}^2T_0 \frac{\omega_0}{2\pi}\sum_{p=-\infty}^{\infty} \left|\tilde{\lambda_0}(p\omega_0)\right|^2 \left|B(p\omega_0)\right|^2\Real{Z(p\omega_0)}.
+        P = I_\mathrm{t}^2T_0 \frac{\omega_0}{2\pi}\sum_{p=-\infty}^{\infty} \left|\tilde{\lambda_0}(\omega_p)\right|^2 \left|B(\omega_p)\right|^2\Real{Z(\omega_p)},
     \end{equation}
-    Note that
+    where $\omega_p = p\omega_0$. Note that
     $
         B(p\omega_0) = \sum_{\ell=0}^{h-1}F_\ell e^{i2\pi p\ell} = \mathrm{DFT}(F)^*_p,
     $
-    where $\mathrm{DFT}(F)^*_p$ denotes the complex conjugate of the $p$-th component of the \gls{dft} of the filling pattern vector.
-    
-    Since the filling pattern has length $h$, its \gls{dft} has the following property
+    where $\mathrm{DFT}(F)^*_p$ denotes the complex conjugate of the $p$-th component of the \gls{dft} of the filling pattern vector. Since the filling pattern has length $h$, its \gls{dft} has the property:
     $
         B((p+h)\omega_0) = B(p\omega_0)
     $,
@@ -188,134 +151,79 @@
     where $\omega_{p,l} = (ph+\ell)\omega_0$.
     
     Now, if we assume the impedance varies slowly in the frequency scale of the rf frequency, i.e., it is a broad band impedance,
-    \begin{equation}
-        Z((ph+\ell)\omega_0) \approx Z(ph\omega_0), \quad \forall\, p \in\mathbb{Z}\,\,\mathrm{and}\,\, \ell \in[0,h-1],
-    \end{equation}
-    and remembering the Parseval's theorem for the~\gls{dft}~\cite{Wikipedia_DFT}
-    \begin{equation}
+    $
+        Z((ph+\ell)\omega_0) \approx Z(ph\omega_0), \, \forall\, p \in\mathbb{Z}\,\,\mathrm{and}\,\, \ell \in[0,h-1],
+    $
+    and remembering the Parseval's theorem for the~\gls{dft}~\cite{Wikipedia_DFT},
+    $
         \sum_{\ell=0}^{h-1} \left|B(\ell\omega_0)\right|^2 = h\sum_{\ell=0}^{h-1} F_\ell^2 = h|F|^2,
-    \end{equation}
+    $
     we can write the power loss as
     \begin{equation}
-        P \approx I_\mathrm{t}^2 \left|F\right|^2 T_0 \frac{h\omega_0}{2\pi}\sum_{p=-\infty}^{\infty} \left|\tilde{\lambda_0}(ph\omega_0)\right|^2 \Real{Z(ph\omega_0)},
+        P \approx I_\mathrm{t}^2 \left|F\right|^2 T_0 \frac{h\omega_0}{2\pi}\sum_{p=-\infty}^{\infty} \left|\tilde{\lambda_0}(\bar{\omega}_p)\right|^2 \Real{Z(\bar{\omega}_p)},
     \end{equation}
-    where we note it depends on the square of the total current stored and on the modulus squared of the filling pattern vector. Defining the loss factor
-    \begin{equation}
-        \kappa = \frac{h\omega_0}{2\pi}\sum_{p=-\infty}^{\infty} \left|\tilde{\lambda_0}(ph\omega_0)\right|^2 \Real{Z(ph\omega_0)}\approx \frac{1}{2\pi}\int_{-\infty}^{\infty} \der\omega \left|\tilde{\lambda_0}(\omega)\right|^2 \Real{Z(\omega)},
-    \end{equation}
+    where $\bar{\omega}_p = ph\omega_0$. Defining the loss factor
+    $
+        \kappa = \frac{h\omega_0}{2\pi}\sum_{p=-\infty}^{\infty} \left|\tilde{\lambda_0}(\bar{\omega}_p)\right|^2 \Real{Z(\bar{\omega}_p)}
+    $,
     the power loss can be summarized as
     \begin{equation}\label{eq:power_broadband}
         P \approx I_\mathrm{t}^2 \left|F\right|^2 T_0\, \kappa.
     \end{equation}
-    
-    The modulus squared of the filling pattern is minimum for uniform filling, $|F|^2=1/h$, and maximum for a single-bunch, $|F|^2=1$. Also, for simplified filling patterns with $M$ arbitrarily spaced bunches with the same current per bunch, we have $|F|^2=1/M$.
+    Note it depends on the square of the total current stored and on the modulus squared of the filling pattern vector, which is minimum for uniform filling, $|F|^2=1/h$, and maximum for a single-bunch, $|F|^2=1$. Also, for simplified filling patterns with $M$ arbitrarily spaced bunches with the same current per bunch, we have $|F|^2=1/M$.
 
 \section{Model Calculations}
 
-Figure~\ref{fig:model_vary_vgap} shows the power loss predicted by the impedance budget model of the SIRIUS storage ring for each component of the vacuum chamber when the gap voltage of the cavity is varied and uniform filling is considered. Note the strong dependence of the power loss with the bunch length.
-\begin{figure}
-    \centering
-    \includegraphics[width=0.48\textwidth]{vary_vgap_uniform_fill_curr200p00mA.png}
-    \caption{Power loss for each component of the impedance budget model as function of the cavity voltage and bunch length.}
-    \label{fig:model_vary_vgap}
-\end{figure}
-Figure~\ref{fig:model_vary_fillp} shows the model prediction for power loss for different filling patterns. Since most of the components are dominated by broad band impedances, the power loss do not depend too much on the filling pattern.
-\begin{figure}
-    \centering
-    \includegraphics[width=0.48\textwidth]{vary_fillp_equivcurr200p00mA.png}
-    \caption{Power loss for each component of the impedance budget model for several filling patterns. The total current used for each filling pattern was calculated using~\eqref{eq:power_broadband} so that the equivalent current in uniform filling was kept constant and equal to~\SI{200}{\milli\ampere}. The nomenclature~"$\!N$ Bun." refers to fillings with~$N$ equally spaced bunches.}
-    \label{fig:model_vary_fillp}
-\end{figure}
-
-From these results we see that the taper transition of the superconducting rf cavities is the single component with the larger power loss reaching approximately~\SI{500}{\watt} at~\SI{200}{\milli\ampere} in uniform filling and~\SI{3}{\mega\volt} in the rf cavities. The second class of components with large power deposition are the striplines, ranging from~\SIrange{30}{90}{\watt} of deposited power.
-
-\section{First Machine Shift (2023/07/25)}
-
-Several temperature and pressure PVs were monitored during this study via archiver viewer.
-
-\begin{itemize}
-    \item Before the machine study there was \SI{100}{\milli\ampere} stored in the ring with nominal operation conditions;
-    \item From this point, we tried to decrease the gap voltage of the cavity and increase the current so that the total power consumption of the cavity stayed constant;
-    \item It was difficult to keep the beam stable in the longitudinal plane, so the process was slow;
-    \item When we were at~\SI{107.5}{\milli\ampere} there was a beam dump of an so far unknown cause;
-    \item We tried again, but another beam dump happened when we were at~\SI{110}{\milli\ampere};
-    \item Another beam dump, now at a current lower than~\SI{100}{\milli\ampere};
-    \item Francisco Gabriel, found out the cause for the beam dumps was the temperature of a mirror in the CEDRO beamline. We couldn't identify this earlier because this interlock was not properly mapped in the logging system;
-    \item There was an access to the tunnel to solve a problem with the mirror movement system. In this intervention, they also found a problem with a valve that controls the water flow of the mirror's cooling system;
-    \item Lunch;
-\end{itemize}
-
-\subsection{Non-uniform Filing}
-\begin{itemize}
-    \item After lunch we decided to change plans and study the heating under non-uniform fillings;
-    \item We started by injecting a multi-bunch train of the EGun on the storage ring without changing the bucket list, such that all stored current is located on a single train. The bucket list index used was the bucket~\num{260}.
-    \item In our first try the beam was dumped due to a problem in the IMBUIA beamline. There was another access to the tunnel to solve a problem related to the mirrors. We believe these problems with CEDRO and IMBUIA were not related to our study;
-    \item We estimated the bunch profile using the horizontal and vertical~\gls{bbb} and the filling patter oscilloscope. Figure~\ref{fig:2023-07-25_onetrain_fill} shows the estimated filling pattern;
+    Figure~\ref{fig:model_vary_vgap}
     \begin{figure}
         \centering
-        \includegraphics[width=0.48\textwidth]{2023-07-25_onetrain_run1_curr50p028mA.png}
-        \caption{Filling pattern estimation by three different systems. Note the horizontal~\gls{bbb} gives a different filling, probably due to some non-optimal timing configuration. The text shows the equivalent current calculated using each filling.}
-        \label{fig:2023-07-25_onetrain_fill}
+        \includegraphics[width=0.48\textwidth]{vary_vgap_uniform_fill_curr200p00mA.png}
+        \caption{Power loss for each component of the impedance budget model as function of the cavity voltage and bunch length.}
+        \label{fig:model_vary_vgap}
     \end{figure}
-    \item In the first try we reached~\SI{55}{\milli\ampere} and the beam was dumped due to interlock of the vacuum pump of sector 14M1. The valves from sector 13M2 and 14M1 were also closed;
-    \item This same problem also happened for three more runs with the same filling pattern, now at smaller currents:~\SI{30}{\milli\ampere},~\SI{45}{\milli\ampere} and~\SI{39}{\milli\ampere}. We believe these problems are related to some narrow band impedance of the flange of the DCCT installed in sector 13C4. Such hypothesis is justified by the non-repeatability of the current at which these events happen and on the speed in which they occur. Analysing of the vacuum from that sector via archiver viewer, we noted several sudden pressure peaks, which is in contrast to the slow temperature and pressure rise of other sectors as seen in the graphs of Table~\ref{tab:graphics};
-    \item To try to continue pushing up the estimated current for uniform filling without having these beam dumps, we injected a different filling pattern, with two trains. This filling pattern has a smaller number and intensity of revolution harmonics, and we hoped it would require a higher total stored current to dump the beam;
-    \item With this filling pattern we reached~\SI{90}{\milli\ampere} of stored current, which amounts to~\SI{220}{\milli\ampere} in uniform fill in terms of broadband impedance induced heating. Figure~\ref{fig:2023-07-25_twotrain_fill} shows the estimated filling pattern and the currents in uniform filling.
+     shows the power loss predicted by the impedance budget model of the SIRIUS storage ring for each component of the vacuum chamber when the gap voltage of the cavity is varied and uniform filling is considered. Note the strong dependence of the power loss with the bunch length. Figure~\ref{fig:model_vary_fillp}
     \begin{figure}
         \centering
-        \includegraphics[width=0.48\textwidth]{2023-07-25_twotrains_run1_curr90p209mA.png}
-        \caption{Filling pattern estimation by three different systems. Note the horizontal~\gls{bbb} gives a different filling, probably due to some non-optimal timing configuration. The text shows the equivalent current calculated using each filling.}
-        \label{fig:2023-07-25_twotrain_fill}
+        \includegraphics[width=0.48\textwidth]{vary_fillp_equivcurr200p00mA.png}
+        \caption{Power loss for each component of the impedance budget model for several filling patterns. The total current used for each filling pattern was calculated using Eq.~\eqref{eq:power_broadband} so that the equivalent current in uniform filling was kept constant and equal to~\SI{200}{\milli\ampere}. The nomenclature~"$\!N$ Bun." refers to fillings with~$N$ equally spaced bunches.}
+        \label{fig:model_vary_fillp}
     \end{figure}
-    \item At this current the beam was dumped again due to the same interlock as before, when we were injecting in a single train. This sudden dump also corroborates with the hypothesis that relates it with narrow band impedances, because we reached currents whose equivalent uniform fill current are much larger than the ones we reached with the single train;
-\end{itemize}
+     shows the model prediction for power loss for different filling patterns, keeping the equivalent total power constant, according to Eq.~\eqref{eq:power_broadband}. Since most components are dominated by broad band impedances, the power loss do not depend too much on the filling pattern.
+    
+    From these results we see that the taper transition of the superconducting rf cavities is the single component with the larger power loss reaching approximately~\SI{225}{\watt} at~\SI{200}{\milli\ampere} in uniform filling and~\SI{1.6}{\mega\volt} in the rf cavities. Since this component is not installed yet, it will not be possible to check future heating problems. However, this power load was considered in thermal simulations of this component. The second class of components with large power deposition are the striplines, ranging from~\SIrange{20}{50}{\watt} of deposited power.
 
-\subsection{Uniform Filling}
-\begin{itemize}
-    \item After this study we went back to trying to inject currents larger than~\SI{100}{\milli\ampere} in uniform filling with a lower voltage gap. This time we didn't care for the longitudinal stability, so the beam was always unstable;
-    \item We started with a low gap voltage of~\SI{\approx1}{\mega\volt} and ramped up the current from zero. At~\SI{64}{\milli\ampere} the instability of the beam started to compromise the low level rf control and we had to increase the voltage;
-    \item We followed this strategy along the rest of the experiment. We reached~\SI{150}{\milli\ampere} with a gap voltage of~\SI{1.5}{\mega\volt} and using~\SI{120}{\kilo\watt} of power;
-    \item This \href{http://ais-eng-srv-ta.cnpem.br/archiver-viewer/index.html?pv=optimized_800(SI-Glob%3AAP-CurrInfo%3ACurrent-Mon)&pv=optimized_800(RA-TL%3ARF-Circulator-SIA%3APwrFwdOut-Mon)&pv=optimized_800(SI-02SB%3ARF-P7Cav%3AAmpVCav-Mon)&pv=optimized_800(SI-Glob%3ADI-BbBProc-L%3ASRAM_PEAK1)&from=2023-07-25T21%3A12%3A22.539Z&to=2023-07-25T22%3A12%3A22.539Z&ref=2023-07-25T00%3A03%3A59.368Z}{graphic} shows some variables related to the study described above.
-\end{itemize}
+\section{Experimental results}
 
-\subsection{Final Remarks}
+    Two machine studies were conducted to probe both approaches of estimation of heat-load. The method of decreasing the cavity voltage was tested first. In practice, the lower cavity voltage reduced the synchrotron tune, decreasing the longitudinal coupled-bunch instability threshold induced by the cavity \glspl{hom}. With the lower tune, the instability was stronger than what is controllable by the~\gls{bbb}. We started with a low gap voltage of~\SI{\sim0.9}{\mega\volt} and increased the current from zero. At~\SI{64}{\milli\ampere} the beam instability started to compromise the low level RF control and we had to increase the voltage. We followed this strategy along the rest of the experiment and reached~\SI{150}{\milli\ampere} with a gap voltage of~\SI{1.35}{\mega\volt} and using~\SI{120}{\kilo\watt} of power. During this study no temperature increase was noted in any sector of the storage ring.
+    
+    The study with non-uniform fillings started with a single train of filled buckets, as shown in Fig.~\ref{fig:2023-08-01_onetrain_fill}.
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.48\textwidth]{trains1_run3_curr65p103.png}
+        \caption{Filling pattern estimation by three different systems. The text shows the equivalent current calculated using each filling.}
+        \label{fig:2023-08-01_onetrain_fill}
+    \end{figure}
+    In this run,~\SI{65}{\milli\ampere} was reached with a single train in the machine. The current could not be increased any further because the temperature of the cavity window was too close from its interlock threshold of~\SI{100}{\celsius}. This high temperature was being induced by coupled-bunch oscillations of the beam, due to \glspl{hom} of the cavity. The current was kept constant in top-up mode for some time to analyse the evolution of the pressure and temperature of the components. No pressure related problems were observed, but some temperature from sector~\num{1} increased significantly and did not stabilize during the whole experiment, reaching~\SI{\approx53}{\celsius} before the beam was dumped, see Fig.~\ref{fig:temps_sector1}.
+        \begin{figure}
+        \centering
+        \includegraphics[width=0.5\textwidth]{temps_sector1.png}
+        \caption{Filling pattern estimation by three different systems. The text shows the equivalent current calculated using each filling.}
+        \label{fig:temps_sector1}
+    \end{figure}
+    % Unfortunately, it was not possible to identify which component was the source of the observed heating.
 
-This first study indicates that the heating caused by the broad band impedance of the storage ring will not be an issue for operation with currents up to~\SI{200}{\milli\ampere}. We will perform more studies to confirm this assumption. In particular, we must make sure the beam dumps of this study were in fact being caused by narrow band impedances and fix the source of this contribution. We also need to let the beam stored for longer periods under the more demanding condition of filling pattern and total current so that the temperatures stabilize.
-
-\section{Second Machine Shift (2023/08/01)}
-
-In this second machine study we only pursued the idea related to more demanding filling patterns. We did not tried to increase the current beyond~\SI{100}{\milli\ampere}. Prior to this study, we accessed the tunnel and tightened the screws of the flange of the DCCT from sector 13C4. The screws allowed a modest tightening of approximately 1/3 of turns.
-
-At around 8:00h the archiver crashed and the control netword became unstable. An intervention and restart of archiver was needed. All PVs took too long to connect to archiver, and the system only re-established all connections after lunch (around 13:00h). For this reason the first current ramp made in the morning is not archived. In this run, we reached~\SI{65}{\milli\ampere} with a single train in the machine. When we were ramping up to~\SI{70}{\milli\ampere} there was a beam dump to overheating of the vacuum window between the cavity and the waveguide. This interlock setpoint is~\SI{100}{\celsius} and could not be relaxed during the experiment. This temperature is highly influenced by the stability of the beam. Coupled-bunch oscillations generate extra power deposition on the region of the window. As an example, at nominal operation of~\SI{100}{\milli\ampere} at uniform filling with stable beam, the temperature only reaches~\SI{\approx52}{\celsius}.
-
-During this first experiment we also fixed the timing configuration of the horizontal~\gls{bbb} so that its filling pattern estimate was in good agreement with the one from the vertical~\gls{bbb} and the oscilloscope. We had to change the phase of the front-end to accomplish this improvement in amplitude detection.
-
-We went to lunch to wait for the Archiver to connect with all relevant PVs, including the one from the window. After lunch we inject a small current (\SI{35}{\milli\ampere}) in uniform filling to find the right phase for the horizontal~\gls{bbb} feedback coefficients. After that we went back to the single train filling. This time we also reached~\SI{65}{\milli\ampere} but did not go any further because of the temperature of the window. The \href{http://ais-eng-srv-ta.cnpem.br/archiver-viewer/?pv=optimized_800(SI-02SB%3ARF-P7Cav%3AGlassWinT-Mon)&pv=optimized_800(SI-Glob%3AAP-CurrInfo%3ACurrent-Mon)&from=2023-08-01T13%3A04%3A34.194Z&to=2023-08-01T21%3A04%3A34.194Z&ref=2023-08-03T19%3A20%3A55.734Z}{graph} shows the temperature of the window and the stored current during this experiment. Figure~\ref{fig:2023-08-01_onetrain_fill}
-\begin{figure}
-    \centering
-    \includegraphics[width=0.48\textwidth]{2023-08-01_trains1_run3_curr65p103.png}
-    \caption{Filling pattern estimation by three different systems. The text shows the equivalent current calculated using each filling.}
-    \label{fig:2023-08-01_onetrain_fill}
-\end{figure}
-shows the equivalent current reached in this situation. We kept the beam with this current in top-up mode for some time to analyse the evolution of the pressure and temperature of the components. We didn't notice any problems related to the pressure, but some measurements of temperature from sector~\num{1} increased significantly and did not stabilize during the whole experiment, reaching~\SI{\approx53}{\celsius} before we dumped the beam. We don't know yet to which component this measurement refers, but we will access the tunnel next Monday morning (2023/08/06) to map the sensor position. Most probably though, it refers to the vertical scraper.
-
-Next, we injected the beam in two trains. In this configuration we could reach~\SI{90}{\milli\ampere} and the temperature of the window was kept at~\SI{96}{\celsius}. The same heating problem was observed in sector 1. Figure~\ref{fig:2023-08-01_twotrains_fill}
-\begin{figure}
-    \centering
-    \includegraphics[width=0.48\textwidth]{2023-08-01_trains2_run1_curr90p469.png}
-    \caption{Filling pattern estimation by three different systems. The text shows the equivalent current calculated using each filling.}
-    \label{fig:2023-08-01_twotrains_fill}
-\end{figure}
-shows the equivalent current of this filling. The similarity to the single train estimated current together with the same heating behavior, corroborates with the hypothesis of broadband induced power on the component close to the sensor.
-
-We ended the machine shift at around 17:00h to start recovering the machine for users operation.
+    Next, the beam was injected in two trains. Figure~\ref{fig:2023-08-01_twotrains_fill}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.48\textwidth]{trains2_run1_curr90p469.png}
+        \caption{Filling pattern estimation by three different systems. The text shows the equivalent current calculated using each filling.}
+        \label{fig:2023-08-01_twotrains_fill}
+    \end{figure}
+    shows the equivalent current of this filling pattern. In this configuration, it was possible to reach~\SI{90}{\milli\ampere}, keeping he temperature of the cavity window at~\SI{96}{\celsius}. The same heating problem was observed in sector 1. Figure~\ref{fig:temps_sector1} shows the similarity between the heating of the single train experiment with the one with two trains. Both experiments had similar equivalent currents, as shown in Figs~\ref{fig:2023-08-01_onetrain_fill} and~\ref{fig:2023-08-01_twotrains_fill}. This observation corroborates with the hypothesis of broadband induced power on the component close to the sensor.
 
 \section{Conclusion}
-The mode 1 instability induced by HCs in electron storage rings was investigated. The instability was reproduced with 1 macroparticle per bunch in tracking simulations and accurately predicted with a linear theory for Gaussian bunches slightly adapted to a HC system. Determining the most appropriate measure of average incoherent frequency remains an open question. Instability occurs when two radial modes approach zero frequency. A direct conclusion is that parameters that either increase the incoherent synchrotron frequency or decrease the negative coherent shifts of coupled-bunch mode 1 are beneficial to increase the current or HC voltage threshold. In 4\textsuperscript{th} generation synchrotrons, the ultralow emittances requires reduced momentum compaction factor and sychrotron frequency, which make new machines with HCs more susceptible to the mode 1 instability.
 
-
-\section{Acknowledgments}
-The authors thank Liu Lin and Ximenes Resende for fruitful discussions and suggestions.
+This study aimed to access the heating load of operations at higher currents with different proxies. The method based on different filling patterns has shown to be more efficient for such verification in the case of SIRIUS, because it conserves the bunch length. In this context, it was shown experimentally that SIRIUS will probably be able to operate at~\SI{200}{\milli\ampere} without the need of the~\gls{3hc}. 
 %
 % only for "biblatex"
 %
