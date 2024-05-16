@@ -136,7 +136,7 @@
     \end{equation}
     where $\omega_p = p\omega_0$. Note that
     $
-        B(p\omega_0) = \sum_{\ell=0}^{h-1}F_\ell e^{i2\pi p\ell} = \mathrm{DFT}(F)^*_p,
+        B(\omega_p) = \sum_{\ell=0}^{h-1}F_\ell e^{i2\pi p\ell/h} = \mathrm{DFT}(F)^*_p,
     $
     where $\mathrm{DFT}(F)^*_p$ denotes the complex conjugate of the $p$-th component of the \gls{dft} of the filling pattern vector. Since the filling pattern has length $h$, its \gls{dft} has the property:
     $
@@ -148,11 +148,11 @@
     \end{equation}
     where $\omega_{pl} = (ph+\ell)\omega_0$.
     
-    Now, if we assume the impedance varies slowly in the frequency scale of the rf frequency, i.e., it is a broadband impedance,
+    Now, we assume the impedance varies slowly in the frequency scale of the rf frequency, i.e., it is a broadband impedance,
     $
         Z((ph+\ell)\omega_0) \approx Z(ph\omega_0), \, \forall\, p \in\mathbb{Z}\,\,\mathrm{and}\,\, \ell \in[0,h-1],
     $
-    and remembering the Parseval's theorem for the~\gls{dft}~\cite{Wikipedia_DFT},
+    and that the distribution also varies slowly. Using Parseval's theorem for the~\gls{dft}~\cite{Wikipedia_DFT},
     $
         \sum_{\ell=0}^{h-1} \left|B(\ell\omega_0)\right|^2 = h\sum_{\ell=0}^{h-1} F_\ell^2 = h|F|^2,
     $
@@ -170,7 +170,7 @@
     \end{equation}
     Note it depends on the square of the total current stored and on the modulus squared of the filling pattern vector, which is minimum for uniform filling, $|F|^2=1/h$, and maximum for a single-bunch, $|F|^2=1$. Also, for simplified filling patterns with $M$ arbitrarily spaced bunches with the same current per bunch, we have $|F|^2=1/M$.
 
-\section{Model Calculat3ions}
+\section{Model Calculations}
 
     Figure~\ref{fig:model_vary_vgap}
     \begin{figure}
@@ -183,7 +183,7 @@
     \begin{figure}
         \centering
         \includegraphics[width=0.48\textwidth]{THPC44_f5.png}
-        \caption{Power loss for each component of the impedance budget model for several filling patterns. The total current used for each filling pattern was calculated using Eq.~\eqref{eq:power_broadband} so that the equivalent current in uniform filling was kept constant and equal to~\SI{200}{\milli\ampere}. The nomenclature~"$\!N$ Bun." refers to fillings with~$N$ equally spaced bunches.}
+        \caption{Power loss for each component of the impedance budget model for several filling patterns, considering a bunch length of~\SI{3.5}{\milli\meter}. The total current used for each filling pattern was calculated using Eq.~\eqref{eq:power_broadband} so that the equivalent current in uniform filling was kept constant and equal to~\SI{200}{\milli\ampere}. The nomenclature~"$\!N$ Bun." refers to fillings with~$N$ equally spaced bunches.}
         \label{fig:model_vary_fillp}
     \end{figure}
      shows the model prediction for power loss for different filling patterns, keeping the equivalent total power constant, according to Eq.~\eqref{eq:power_broadband}. Since most components are dominated by broadband impedances, the power losses do not depend too much on the filling pattern.
@@ -225,7 +225,7 @@
 
 \section{Conclusion}
 
-This study aimed to access the heating load of operations at higher currents with different proxies. The method based on different filling patterns has shown to be more efficient for such verification in the case of SIRIUS, because it conserves the bunch length. In this context, it was verified experimentally that SIRIUS will probably be able to operate at~\SI{200}{\milli\ampere} without the need of the~\gls{3hc}. It was not possible to test higher currents because of the temperature limitation imposed by the RF cavity window.
+This study aimed to assess the heating load of operations at higher currents with different proxies. The method based on different filling patterns has shown to be more efficient for such verification in the case of SIRIUS, because it conserves the bunch length. In this context, it was verified experimentally that SIRIUS will probably be able to operate at~\SI{200}{\milli\ampere} without the need of the~\gls{3hc}. It was not possible to test higher currents because of the temperature limitation imposed by the RF cavity window.
 %
 % only for "biblatex"
 %
