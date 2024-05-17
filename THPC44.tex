@@ -16,7 +16,7 @@
     %refpage       % separate references
     % biblatex,     % biblatex is used
     %keeplastbox,   % flushend option: not to un-indent last line in References
-    %nospread,     % flushend option: do not fill with whitespace to balance columns
+    nospread,     % flushend option: do not fill with whitespace to balance columns
     %hyphens,      % allow \url to hyphenate at "-" (hyphens)
     %xetex,        % use XeLaTeX to process the file
     %luatex,       % use LuaLaTeX to process the file
@@ -175,14 +175,14 @@
     Figure~\ref{fig:model_vary_vgap}
     \begin{figure}
         \centering
-        \includegraphics[width=0.48\textwidth]{THPC44_f4.png}
+        \includegraphics[width=0.48\textwidth]{THPC44_f1.png}
         \caption{Power loss for each component of the impedance budget model as function of the cavity voltage and bunch length.}
         \label{fig:model_vary_vgap}
     \end{figure}
      shows the power loss predicted by the impedance budget model of the SIRIUS storage ring for each component of the vacuum chamber when the gap voltage of the cavity is varied and uniform filling is considered. Note the strong dependence of the power loss with the bunch length. Figure~\ref{fig:model_vary_fillp}
     \begin{figure}
         \centering
-        \includegraphics[width=0.48\textwidth]{THPC44_f5.png}
+        \includegraphics[width=0.48\textwidth]{THPC44_f2.png}
         \caption{Power loss for each component of the impedance budget model for several filling patterns, considering a bunch length of~\SI{3.5}{\milli\meter}. The total current used for each filling pattern was calculated using Eq.~\eqref{eq:power_broadband} so that the equivalent current in uniform filling was kept constant and equal to~\SI{200}{\milli\ampere}. The nomenclature~"$\!N$ Bun." refers to fillings with~$N$ equally spaced bunches.}
         \label{fig:model_vary_fillp}
     \end{figure}
@@ -197,14 +197,14 @@
     The study with non-uniform fillings started with a single train of filled buckets, as shown in Fig.~\ref{fig:2023-08-01_onetrain_fill}.
     \begin{figure}
         \centering
-        \includegraphics[width=0.48\textwidth]{THPC44_f1.png}
+        \includegraphics[width=0.95\columnwidth]{THPC44_f3.png}
         \caption{Measurement of filling pattern with three different systems: the vertical and horizontal~\gls{bbb} and a filling pattern oscilloscope. The equivalent current in uniform fill to create the same power deposition was calculated with Eq.~\eqref{eq:power_broadband}.}
         \label{fig:2023-08-01_onetrain_fill}
     \end{figure}
     In this run,~\SI{65}{\milli\ampere} was reached with a single train in the machine. The current could not be increased any further because the temperature of the cavity window was too close from its interlock threshold of~\SI{100}{\celsius}. This high temperature was being induced by coupled-bunch oscillations of the beam, due to \glspl{hom} of the cavity. The current was kept constant in top-up mode for some time to analyse the evolution of the pressure and temperature of the components. No pressure related problems were observed, but one temperature from sector~\num{1} increased and did not stabilize during the whole experiment, reaching~\SI{\approx53}{\celsius} before the beam was dumped, see Fig.~\ref{fig:temps_sector1}.
         \begin{figure}
         \centering
-        \includegraphics[width=0.5\textwidth]{THPC44_f2.png}
+        \includegraphics[width=0.95\columnwidth]{THPC44_f4.png}
         \caption{Temperature readouts of the storage ring injection sector during the experiments with non-uniform filling.}
         \label{fig:temps_sector1}
     \end{figure}
@@ -213,7 +213,7 @@
     Next, the beam was injected in two trains. Figure~\ref{fig:2023-08-01_twotrains_fill}
     \begin{figure}
         \centering
-        \includegraphics[width=0.48\textwidth]{THPC44_f3.png}
+        \includegraphics[width=0.95\columnwidth]{THPC44_f5.png}
         \caption{Filling patter measurement, see legend of~Fig.~\ref{fig:2023-08-01_onetrain_fill}.}
         \label{fig:2023-08-01_twotrains_fill}
     \end{figure}
@@ -240,16 +240,15 @@ This study aimed to assess the heating load of operations at higher currents wit
         %\cite{Chao:1993zn}
         \bibitem{Chao:1993zn}
         A.~W.~Chao,
-        Physics of collective beam instabilities in high-energy accelerators,
-        John Wiley \& Sons, 1993.
+        \textit{Physics of collective beam instabilities in high-energy accelerators},
+        John Wiley \& Sons, 1993. \\ \\
         
         \bibitem{Wikipedia_DFT}
         Wikipedia contributors,
-        "Discrete Fourier transform -- Wikipedia, The Free Encyclopedia",
+        "Discrete Fourier transform --~ Wikipedia, The Free Encyclopedia",\\
         \url{https://en.wikipedia.org/w/index.php?title=Discrete_Fourier_transform&oldid=1153873152}
     \end{thebibliography}
 } % end \ifboolexpr
 
 
 \end{document}
-
